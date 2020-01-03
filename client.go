@@ -20,6 +20,9 @@ type client struct {
 	transporter Transporter
 }
 
+func (mb *client) ChangeSlaveId(newSlaveId byte) {
+	mb.packager.ChangeSlaveId(newSlaveId)
+}
 // NewClient creates a new modbus client with given backend handler.
 func NewClient(handler ClientHandler) Client {
 	return &client{packager: handler, transporter: handler}
@@ -29,6 +32,7 @@ func NewClient(handler ClientHandler) Client {
 func NewClient2(packager Packager, transporter Transporter) Client {
 	return &client{packager: packager, transporter: transporter}
 }
+
 
 // Request:
 //  Function code         : 1 byte (0x01)
